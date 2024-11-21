@@ -1,21 +1,32 @@
+ @props(['video_id'])
 
-@props(['video_id'])
-<x-forms.formlayout _method="post" style="true" method="post" action="/comment/upload"  >
-    <div class="w-full mt-4 border border-gray-200 rounded-lg bg-gray-50  ">
-        <div class="px-4 py-2 bg-white rounded-t-lg ">
-           
-            <x-forms.textarea label="تعليق" name="body" placeholder="اكتب تعليقك هنا "/>
-            <input type="hidden" name="course_id" value="{{$video_id}}">
 
-            {{-- <textarea id="comment"  rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0  focus:ring-0 " placeholder="Write a comment..." required ></textarea> --}}
-        </div>
-        <div class=" flex-row-reverse  px-3 py-2 border-t " dir="ltr">
-            <button type="submit" class=" items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800">
-                Post comment
-            </button>
 
-        </div>
+<form  method="POST"
+    {{ $attributes->merge([
+        'class' => 'fixed bottom-0 left-1/2 transform -translate-x-1/2 duration-1000 z-10 w-full max-w-2xl border border-gray-200 rounded-lg bg-gray-50',
+        'method' => 'POST',
+    ]) }}>
+    @csrf
+    @method('POST')
+
+    <div class="px-4 py-2 bg-white rounded-t-lg">
+        <x-forms.label>
+           تعليق من  <span class=" text-sm text-gray-500">{{Auth::user()->first_name}} </span> 
+        </x-forms.label>
+        <x-forms.textarea name="body" placeholder="اكتب تعليقك هنا" />
+        <x-forms.input-error :messages="$errors->get('body')" class="mt-2" />
+        <input type="hidden" name="video_id" value={{$video_id}} >
     </div>
- </x-forms.formlayout >
- {{-- <p class="ms-auto text-xs text-gray-500 ">Remember, contributions to this topic should follow our <a href="#" class="text-blue-600  hover:underline">Community Guidelines</a>.</p> --}}
- 
+    <div class="h-18 flex-row-reverse px-3 py-2 border-t bg-white" dir="ltr">
+        <button type="submit"
+            class="items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+            reply
+        </button>
+        <button type="button"
+            class="items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
+            @click="showCommentModal = false">
+            cancel
+        </button>
+    </div>
+</form>

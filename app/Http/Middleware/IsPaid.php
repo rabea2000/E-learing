@@ -2,15 +2,17 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\PaidUsers;
+use App\Models\User;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdminMiddleware
+class IsPaid
 {
-    
     /**
      * Handle an incoming request.
      *
@@ -18,14 +20,18 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
-        if(Auth::user() && Auth::user()->is_admin ) {
+     
+        $user = Auth::user() ; 
+        if (Auth::check()) {
 
-            return $next($request);
+            if(!PaidUsers::where("user_id","=",$user->id)->exists() || !$user->is_admin )     {
+
+                return view("to-paid") ; 
+            } 
+
         }
+
         
-        abort( 403, 'Sorry, you are unauthorized to view this page');
-        
-        
+        return $next($request);
     }
 }

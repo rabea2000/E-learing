@@ -2,6 +2,7 @@
 
 
 use App\Http\Middleware\IsAdminMiddleware;
+
 use App\Http\Middleware\LastSeen;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -26,7 +27,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
        $middleware->alias([
 
-            'admin' =>IsAdminMiddleware::class 
+            'admin' =>IsAdminMiddleware::class ,
+            'twofactor' => \App\Http\Middleware\TwoFactorMiddleware::class,
+            'is_paid' => \App\Http\Middleware\IsPaid::class ,
        ]) ; 
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -1,6 +1,6 @@
 
 
-@props(['label','options' , "name"])
+@props(['options' ])
 @php
         if (empty($options)) {
         $options = [
@@ -9,14 +9,17 @@
             "12" => "الصف الثاني عشر"
         ] ; 
 
-        $label = " الصف" ;
+
 
     }
 @endphp
 
   
-  <select name={{$name}} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
 
+
+  <select   {{$attributes->merge(
+    ['class'=>"block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"])
+  }}>
     @foreach($options as $key => $value)
          <option value="{{$key}}">{{$value}}</option>
     @endforeach

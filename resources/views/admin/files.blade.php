@@ -9,7 +9,7 @@
             </div>
             @if (isset($files))
                 @foreach ($files as $file)
-                <x-filecarde :file="$file" />
+                <x-file-card-edit :file="$file" />
                 {{-- <a href="files/{{$file->id}}" class=" block font-serif mt-5  font-bold  rtl text-decoration-line: underline" > 
         
                     <div class=" inline-block ml-12 text-decoration-line: underline">  الصف   :  {{$file->classes_id}}   </div>

@@ -14,6 +14,11 @@ class ReplyController extends Controller
     public function store(Request $request) {
 
 
+        $request->validate([
+            'comment_id' => ['required' , 'exists:comments,id'] ,
+            'body' => ['required' , 'min:1' , 'max:2000']
+
+        ]);
        
         Reply::create([
             "body" => $request->body ,

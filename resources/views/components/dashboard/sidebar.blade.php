@@ -40,8 +40,11 @@
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                            </svg>
                         </div>
-                        <input type="text" name="search" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder={{$placdholder}}>
-                  </div>
+                        <form action="" method="GET">
+                           
+                        <input type="text" name="search" id="table-search-users"  class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder={{$placdholder}}>
+                      </form>
+                     </div>
                
                 </div>
 
@@ -106,7 +109,7 @@
                </li>
 
                <li>
-                  <a href="/courses/create" class="flex items-center p-2 mr-4 rounded-lg text-white  hover:bg-gray-700 group">
+                  <a href="/admin/courses/create" class="flex items-center p-2 mr-4 rounded-lg text-white  hover:bg-gray-700 group">
                      <svg class="w-5 h-5  transition duration-75 text-gray-400  group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                         <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                         <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
@@ -116,7 +119,7 @@
                </li>
 
                <li>
-                  <a href="/files/create" class="flex items-center p-2 mr-4 rounded-lg text-white  hover:bg-gray-700 group">
+                  <a href="/admin/files/create" class="flex items-center p-2 mr-4 rounded-lg text-white  hover:bg-gray-700 group">
                      <svg class="w-5 h-5  transition duration-75 text-gray-400  group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                         <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                         <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
@@ -126,7 +129,7 @@
                </li>
 
                <li>
-                  <a href="/files" class="flex items-center p-2 mr-4 rounded-lg text-white  hover:bg-gray-700 group">
+                  <a href="/admin/files" class="flex items-center p-2 mr-4 rounded-lg text-white  hover:bg-gray-700 group">
                      <svg class="w-5 h-5  transition duration-75 text-gray-400  group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                         <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
                         <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>

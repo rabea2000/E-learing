@@ -77,22 +77,7 @@ window.showreplyfield = function (label , action, name ,value){
 
 }
 
-window.showdropdownComment = function (comment_id ,reply ) {
-    
-  const dropdownButton = document.getElementById('dropdownCommentButton');
-   
-  if( reply == undefined  ){
-     const dropdownMenu = document.getElementById('dropdownComment'+comment_id);
-     dropdownMenu.classList.toggle('hidden');
-     return ; 
-    
-  }
 
-  const dropdownMenu  = document.getElementById('dropdownReply'+comment_id);
-  dropdownMenu.classList.toggle('hidden');
-
-
- }
 
  window.toggleDropdownMobile = function () {
      
@@ -101,3 +86,48 @@ window.showdropdownComment = function (comment_id ,reply ) {
 
 }
 
+
+
+// const fileInput = document.getElementById('fileInput');
+// const progressBar = document.getElementById('progressBar');
+// const statusText = document.getElementById('status');
+
+// fileInput.addEventListener('change', (event) => {
+//   const file = event.target.files[0];
+//   if (file) {
+//     uploadFile(file);
+//   }
+// });
+
+// function uploadFile(file) {
+//   const xhr = new XMLHttpRequest();
+//   const formData = new FormData();
+//   formData.append('file', file);
+
+//   // Update progress bar during upload
+//   xhr.upload.addEventListener('progress', (event) => {
+//     if (event.lengthComputable) {
+//       const percentComplete = (event.loaded / event.total) * 100;
+//       progressBar.value = percentComplete;
+//       statusText.textContent = `Upload progress: ${Math.round(percentComplete)}%`;
+//     }
+//   });
+
+//   // Handle successful upload
+//   xhr.addEventListener('load', () => {
+//     if (xhr.status === 200) {
+//       statusText.textContent = 'Upload complete!';
+//     } else {
+//       statusText.textContent = 'Upload failed!';
+//     }
+//   });
+
+//   // Handle errors
+//   xhr.addEventListener('error', () => {
+//     statusText.textContent = 'Error occurred during upload.';
+//   });
+
+//   // Configure the request
+//   xhr.open('POST', '/admin/files',true);
+//   xhr.send(formData);
+// }

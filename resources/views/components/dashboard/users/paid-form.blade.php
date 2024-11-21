@@ -2,7 +2,7 @@
             <!-- Button to Open the Modal -->
             <div class="flex justify-center items-center ">
                 <button id="openModalBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
-                  Open Modal
+                  تحويل لحساب مدفوع 
                 </button>
               </div>
               @if ( $errors->get('amount') == null  ||  $errors->get('user') == null ||  $errors->get('information') == null   )
@@ -30,13 +30,14 @@
       <x-forms.input-error class="mt-2" :messages="$errors->get('user')" />
     </div>
     <div>
-        <x-forms.label for="information"   value="تفاصيل عملية الشراء"/>
+        <x-forms.label for="information"   value="تفاصيل عملية الدفع "/>
         <x-forms.textarea id="information"  name=information  placeholder="اي تفاصيل عن عملية الدفع  (طريقة الدفع ,ملاحظات أخرى ......)" required   />
         <x-forms.input-error class="mt-2" :messages="$errors->get('information')" />
     </div>
     <div>
         <x-forms.label for="amount"   value="القيمة "/>
-        <x-forms.input id="amount" name="amount" type="text" class="mt-2 block w-full"  required  autofocus  hidden />
+     
+        <x-forms.input id="amount" name="amount" type="number" class="mt-2 block w-full"  required  autofocus  hidden />
         <x-forms.input-error class="mt-2" :messages="$errors->get('amount')" />
     </div>
 

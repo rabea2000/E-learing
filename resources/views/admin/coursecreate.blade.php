@@ -3,16 +3,26 @@
 <x-dashboard.mainsection>
     <div class=" mt-14">
     
+
         <div class=" text-center font-bold text-2xl leading-9 tracking-tight text-gray-900 mb-10">
-            <p>اولاً قم بإنشاء الكورس </p>
+          @if ($courses->count() ==  0 )
+                 <p>قم بإنشاء الكورس </p>
+          @else
+                 جميع  الكورسات 
+          @endif
+          
+            
         </div>
 
-           <div class="grid grid-cols-4 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1 : " dir="ltr">
-            
-            <x-course.course-card-dash :course="$courses->first()"/>
-            <x-course.course-card-dash :course="$courses->first()" />
-            <x-course.course-card-dash :course="$courses->first()" />
-                <x-course.course-create-button/> 
+           <div class="grid grid-cols-4  gap-y-10 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1  " >
+            <x-course.course-create-button/> 
+
+            @foreach ($courses as $course)
+                  <x-course.course-card-dash :course="$course"/>
+            @endforeach
+           
+ 
+                
              </div>
     
 

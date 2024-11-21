@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
-
+use App\Notifications\SendTwoFactorCode;
 use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Support\Facades\Hash;
@@ -37,26 +37,34 @@ class SessionController extends Controller
 
         
         $request->authenticate() ; 
-        
- 
-        if(!Visitor::isDeviecAllowed() && !Auth::user()->is_admin){
-         
-            DB::table('access_denied')->insert([
-                'user_id' =>  Auth::user()->id ,
-                'device'  => $request->userAgent() ,
-                'location' => Location::get($request->ip()) ,
-                "created_at" => date('Y-m-d H:i:s') 
-            ]);
-            
-            Auth::logout() ; 
-            return view("session.accessdenied" );
-            
+        $request->session()->regenerate();
+
+
+        if(!Visitor::isDeviecAllowed()) {
+           
+            $request->user()->generateTwoFactorCode();
+            $request->user()->notify(new SendTwoFactorCode());
+            return redirect()->route('verify.index'); 
         }
 
-        Visitor::blockeOtherSession() ; 
+        // if(!Visitor::isDeviecAllowed() && !Auth::user()->is_admin){
+         
+        //     DB::table('access_denied')->insert([
+        //         'user_id' =>  Auth::user()->id ,
+        //         'device'  => $request->userAgent() ,
+        //         'location' => Location::get($request->ip()) ,
+        //         "created_at" => date('Y-m-d H:i:s') 
+        //     ]);
+            
+        //     Auth::logout() ; 
+        //     return view("session.accessdenied" );
+            
+        // }
+
+        // Visitor::blockeOtherSession() ; 
         
 
-        $request->session()->regenerate();
+        
         return redirect('/');
     }
 

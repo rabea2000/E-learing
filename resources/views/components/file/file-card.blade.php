@@ -1,6 +1,7 @@
 @props(['file'])
 
-<div  class="p-4 bg-white/5 rounded-xl flex justify-between  border  border-transparent hover:border-blue-600 group transition-colors duration-500" >
+<a href="/files/{{$file->id}}"  target="_blank">
+<div  class="p-4 bg-white w-80  rounded-xl flex justify-between  border  border-transparent hover:border-blue-600   group transition-colors duration-500 transform " >
     <div class="flex justify-between gap-3">
 
         <div>
@@ -12,9 +13,9 @@
             <div class="flex-1">
                 <p class="text-sm self-start text-gray-400">{{$file->name}}</p>
                 <h3 class="fond-bold text-lg mt-1 group-hover:text-blue-600 transition-colors duration-500 ">
-                    <a href="/files/{{$file->id}}">
+                  
                         {{$file->description}}
-                    </a>
+                    
                 </h3>
             </div>
             <p class="text-sm text-gray-400 "> class :{{ $file->classes_id}}</p>
@@ -38,5 +39,4 @@
     </div>
 </div>
 
-
-
+</a>

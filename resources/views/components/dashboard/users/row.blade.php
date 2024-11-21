@@ -39,7 +39,7 @@
         </div>
     </td>
     <td class="px-6 py-4">
-        <a href="/users/{{$user->id}}" class="font-medium text-blue-600 hover:underline"> More.. </a>
+        <a href="/admin/users/{{$user->id}}" class="font-medium text-blue-600 hover:underline"> More.. </a>
     </td>
 
 

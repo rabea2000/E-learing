@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("title") ;
             $table->string('description');
             $table->string('url');
-            $table->integer("episode")->unique() ;
+            $table->integer("episode");
             $table->foreignIdFor(Course::class) ;
             // $table->foreignIdFor(Classes::class) ;
             $table->timestamps();

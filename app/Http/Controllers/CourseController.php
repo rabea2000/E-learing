@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
@@ -15,7 +16,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view("components.course.index" , ["courses" => $courses]);
+        return view("components.course.index", ["courses" => $courses]);
     }
 
     /**
@@ -24,8 +25,8 @@ class CourseController extends Controller
     public function create()
     {
 
-        $courses = Course::all(); 
-        return view("admin.coursecreate", ["courses" =>$courses]);
+        $courses = Course::all();
+        return view("admin.coursecreate", ["courses" => $courses]);
     }
 
     /**
@@ -33,21 +34,24 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     "title"  => ["required" ,"max:50"],
-        //     "description" => ["required" ],
-        //     "classes_id" => ["required" ]
-            
-        // ]);
-        Course::create([
 
+
+        $request->validate([
+            "title"  => ['required', 'unique:courses,title', 'string', 'min:5', 'max:100'],
+            "description" => ['required', 'string', 'min:15', 'max:1000'],
+            "class" => ["required", 'integer',   'in:10,11,12']
+
+        ]);
+
+
+        Course::create([
             "title"  => $request->title,
             "description" => $request->description,
             "classes_id" =>  $request->class,
 
         ]);
 
-        return redirect('/courses/upload');
+        return redirect('admin/courses/create');
     }
 
     /**
@@ -56,14 +60,16 @@ class CourseController extends Controller
     public function show(string $title)
     {
         //  dd(Course::find($id)) ;
-        $course = Course::with(["video" =>function( $query){
-            $query->orderBy("episode" , 'asc'); 
+        $course = Course::with(["video" => function ($query) {
+            $query->orderBy("episode", 'asc');
         }])
-        ->where("title" , $title)
-        ->firstOrFail() ;
-        
-        return view("components.course.showcourse" ,
-         ['course' =>  $course ]);
+            ->where("title", $title)
+            ->firstOrFail();
+
+        return view(
+            "components.course.showcourse",
+            ['course' =>  $course]
+        );
     }
 
     /**
@@ -71,7 +77,12 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $course = Course::with(["video" => function ($query) {
+            $query->orderBy("episode", 'asc');
+        }])
+            ->where("id", "=", $id)
+            ->firstOrFail();
+        return view("admin.course-show", ["course" => $course]);
     }
 
     /**
@@ -79,7 +90,25 @@ class CourseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $course = Course::findOrFail($id);
+        
+      
+        $request->validate([
+            "edit_course_form.title"  => ['required', 'string', 'min:5', 'max:100' , Rule::unique('courses' ,'title')->ignore($id) ],
+            "edit_course_form.description" => ['required', 'string', 'min:15', 'max:1000'],
+            "edit_course_form.class" => ["required", 'integer',   'in:10,11,12']
+
+        ]);
+    
+     
+
+        $course->title  = $request->edit_course_form["title"];
+        $course->description = $request->edit_course_form["description"];
+        $course->classes_id =  $request->edit_course_form['class'];
+        $course->save() ;
+
+        return redirect('admin/courses/'.$id.'/edit');
+        
     }
 
     /**
@@ -87,6 +116,8 @@ class CourseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       
+        Course::destroy($id);
+        return redirect('/admin/courses/create');
     }
 }

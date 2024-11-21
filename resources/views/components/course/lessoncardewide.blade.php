@@ -1,3 +1,5 @@
+
+
 @props(['video' ,  "course_title"])
 <a href="/courses/{{$course_title}}/episode/{{$video->episode}}" >
     <div class="w-full flex  bg-white border border-gray-200 rounded-lg shadow mt-5 p-4 hover:bg-gray-300 transition-colors duration-500 ">

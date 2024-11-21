@@ -50,9 +50,9 @@ class Visitor {
        
         $devices =   static::allowedDevice(Auth::user())  ; 
             
-           
+          
             foreach ($devices->toArray() as $device ) {
-                
+               
                 if ($device->device == request()->userAgent()  ){
                      return true  ; 
                 }

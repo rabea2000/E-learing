@@ -13,7 +13,8 @@
               <x-urlbutton  url="/about" name="About"/>
               <x-urlbutton  url="/contact" name="Contact"/>
               <x-urlbutton  url="/courses" name="كورسات"/>
-              <x-dropdown/>
+              <x-urlbutton  url="/files" name="ملفات "/>
+              {{-- <x-dropdown/> --}}
 
 
              

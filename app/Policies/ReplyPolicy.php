@@ -11,7 +11,7 @@ class ReplyPolicy
 
     public function delete(User $user, Reply $reply): bool
     {
-        return $reply->user_id === $user->id  || $reply->comment->user_id == $user->id   ; 
+        return $reply->user_id === $user->id  || $reply->comment->user_id == $user->id || $user->is_admin   ; 
     }
 
  

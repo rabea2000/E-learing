@@ -22,11 +22,17 @@ class ProfileController extends Controller
     
     public function update(Request $request): RedirectResponse
     {
+        $request->validate([
+            'img_url' =>[' image' ,'mimes:jpeg,png']
+        ]) ; 
         
+
+       
         if($request->has('action')) {
 
             
-           
+           //  the image will be detete if the action was upload  
+           //  to store anthor image or detete to delet the current image
             if(isset(Auth::user()->img_url)){
             Storage::disk('public')->delete(Auth::user()->img_url);
             }
@@ -37,9 +43,7 @@ class ProfileController extends Controller
             
 
            if ($request->action == 'upload'){
-                $request->validate([
-                    'img_url' =>[' image' ,'mimes:jpeg,png']
-                ]) ; 
+         
                 $filepath = Storage::disk('public')->put('/profile' , $request->file("profilePic"));
                 $request->user()->img_url = $filepath ;
             
